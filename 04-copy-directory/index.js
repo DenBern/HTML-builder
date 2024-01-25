@@ -6,6 +6,12 @@ const pathFolder = pathDir + '/files';
 const copyFolder = pathDir + '/files-copy';
 
 const copyFiles = () => {
+  fs.readdir(copyFolder, (err, files) => {
+    files.forEach((file) => {
+      const filePath = path.join(copyFolder, file);
+      fs.unlinkSync(filePath);
+    });
+  });
   fs.readdir(pathFolder, (err, files) => {
     files.forEach((file) => {
       fs.copyFile(pathFolder + '/' + file, copyFolder + '/' + file, () => {});
